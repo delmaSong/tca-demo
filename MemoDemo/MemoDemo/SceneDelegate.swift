@@ -9,6 +9,12 @@ import UIKit
 
 import ComposableArchitecture
 
+var memos: IdentifiedArrayOf<MemoState> =  [
+    MemoState(id: UUID(), contents: "hi", isLiked: false),
+    MemoState(id: UUID(), contents: "good", isLiked: true),
+    MemoState(id: UUID(), contents: "thanks", isLiked: false)
+]
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -20,11 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let viewController = MemoListViewController(
             store: Store(
                 initialState:
-                    MemoListState(memos: [
-                        MemoState(id: UUID(), contents: "hi", isLiked: false),
-                        MemoState(id: UUID(), contents: "good", isLiked: true),
-                        MemoState(id: UUID(), contents: "thanks", isLiked: false)
-                    ]),
+                    MemoListState(memos: memos),
                 reducer: memoListReducer,
                 environment: MemoListEnvironment()
             )
