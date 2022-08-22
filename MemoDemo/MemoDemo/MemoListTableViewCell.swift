@@ -11,6 +11,8 @@ import SnapKit
 
 final class MemoListTableViewCell: UITableViewCell {
 
+    static let identifier = "MemoListTableViewCell"
+    
     private lazy var likeButton: UIButton = {
         let view = UIButton()
         view.imageView?.image = UIImage(named: "star")
