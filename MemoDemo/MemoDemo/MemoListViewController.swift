@@ -7,10 +7,21 @@
 
 import UIKit
 
+import ComposableArchitecture
 import SnapKit
 
 final class MemoListViewController: UIViewController {
+    let viewStore: ViewStore<EditorState, EditorAction>
 
+    init(store: Store<EditorState, EditorAction>) {
+      self.viewStore = ViewStore(store)
+      super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private let memoListTableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
         view.register(MemoListTableViewCell.self, forCellReuseIdentifier: MemoListTableViewCell.identifier)
