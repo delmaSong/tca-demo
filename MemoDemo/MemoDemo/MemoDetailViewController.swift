@@ -8,10 +8,12 @@
 import UIKit
 
 import ComposableArchitecture
+import Combine
 import SnapKit
 
 final class MemoDetailViewController: UIViewController {
     let viewStore: ViewStore<ViewerState, ViewerAction>
+    var cancellables: Set<AnyCancellable> = []
     
     private let memoTextView: UITextView = {
         let view = UITextView()
@@ -46,5 +48,21 @@ final class MemoDetailViewController: UIViewController {
         
         memoTextView.text = viewStore.memo?.contents
         memoTextView.isEditable = viewStore.memo == nil && viewStore.status != .normal
+        
+        viewStore.publisher.status
+            .sink { [weak self] status in
+                let title = status == .normal ? "편집" : "저장"
+                
+                self?.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                    title: title,
+                    style: UIBarButtonItem.Style.plain,
+                    target: self,
+                    action: #selector(self?.rightBarButtonTapped)
+                )
+            }.store(in: &cancellables)
+    }
+    
+    @objc private func rightBarButtonTapped() {
+        viewStore.send(viewStore.status == .normal ? .editButtonTapped : .saveButtonTapped)
     }
 }
