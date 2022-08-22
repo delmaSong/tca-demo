@@ -15,7 +15,7 @@ final class MemoDetailViewController: UIViewController {
     
     private let memoTextView: UITextView = {
         let view = UITextView()
-        view.isEditable = false
+        view.font = UIFont.systemFont(ofSize: 22)
         return view
     }()
     
@@ -32,10 +32,10 @@ final class MemoDetailViewController: UIViewController {
         super.viewDidLoad()
         
         configure()
-        view.backgroundColor = .systemPink
     }
     
     private func configure() {
+        view.backgroundColor = .white
         
         view.addSubview(memoTextView)
         
@@ -45,5 +45,6 @@ final class MemoDetailViewController: UIViewController {
         }
         
         memoTextView.text = viewStore.memo?.contents
+        memoTextView.isEditable = viewStore.memo == nil && viewStore.status != .normal
     }
 }
