@@ -21,6 +21,19 @@ final class MemoDetailViewController: UIViewController {
         return view
     }()
     
+    private lazy var likeButton: UIButton = {
+       let view = UIButton()
+        view.setImage(UIImage(systemName: "star"), for: .normal)
+        view.setImage(UIImage(systemName: "star.fill"), for: .selected)
+        view.tintColor = .systemGreen
+        view.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        
+        var configuration = UIButton.Configuration.plain()
+        configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 30)
+        view.configuration = configuration
+        return view
+    }()
+    
     init(store: Store<ViewerState, ViewerAction>) {
         self.viewStore = ViewStore(store)
         super.init(nibName: nil, bundle: nil)
@@ -38,21 +51,37 @@ final class MemoDetailViewController: UIViewController {
     
     private func configure() {
         view.backgroundColor = .white
+        memoTextView.text = viewStore.memo?.contents
         
+        addSubviews()
+        configureConstraints()
+        bind()
+    }
+    
+    private func addSubviews() {
         view.addSubview(memoTextView)
-        
+        view.addSubview(likeButton)
+    }
+    
+    private func configureConstraints() {
         memoTextView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.bottom.equalTo(view)
         }
-        
-        memoTextView.text = viewStore.memo?.contents
-        
+        likeButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.leading.equalTo(view).inset(32)
+            make.width.height.equalTo(20)
+        }
+    }
+    
+    private func bind() {
         viewStore.publisher.status
             .sink { [weak self] status in
                 let isNormal = status == .normal
                 let title = isNormal ? "편집" : "저장"
                 self?.memoTextView.isEditable = !isNormal
+                self?.likeButton.isEnabled = isNormal
                 
                 self?.navigationItem.rightBarButtonItem = UIBarButtonItem(
                     title: title,
@@ -65,5 +94,9 @@ final class MemoDetailViewController: UIViewController {
     
     @objc private func rightBarButtonTapped() {
         viewStore.send(viewStore.status == .normal ? .editButtonTapped : .saveButtonTapped(contents: memoTextView.text))
+    }
+    
+    @objc private func likeButtonTapped() {
+        likeButton.isSelected.toggle()
     }
 }
