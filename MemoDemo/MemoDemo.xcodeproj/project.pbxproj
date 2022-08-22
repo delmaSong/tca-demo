@@ -10,6 +10,7 @@
 		CD4FB04E28ADCFB900883EE5 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4FB04D28ADCFB900883EE5 /* Memo.swift */; };
 		CD63806328B3032000FEDAC4 /* MemoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63806228B3032000FEDAC4 /* MemoListViewController.swift */; };
 		CD63806628B3054000FEDAC4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CD63806528B3054000FEDAC4 /* SnapKit */; };
+		CD63806828B305E200FEDAC4 /* MemoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63806728B305E200FEDAC4 /* MemoListTableViewCell.swift */; };
 		CD638F6F28ACD7EE006218A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD638F6E28ACD7EE006218A9 /* AppDelegate.swift */; };
 		CD638F7128ACD7EE006218A9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD638F7028ACD7EE006218A9 /* SceneDelegate.swift */; };
 		CD638F7828ACD7F0006218A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD638F7728ACD7F0006218A9 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		CD4FB04D28ADCFB900883EE5 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		CD63806228B3032000FEDAC4 /* MemoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListViewController.swift; sourceTree = "<group>"; };
+		CD63806728B305E200FEDAC4 /* MemoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListTableViewCell.swift; sourceTree = "<group>"; };
 		CD638F6B28ACD7EE006218A9 /* MemoDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD638F6E28ACD7EE006218A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD638F7028ACD7EE006218A9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				CD638F7928ACD7F0006218A9 /* LaunchScreen.storyboard */,
 				CD638F7C28ACD7F0006218A9 /* Info.plist */,
 				CD63806228B3032000FEDAC4 /* MemoListViewController.swift */,
+				CD63806728B305E200FEDAC4 /* MemoListTableViewCell.swift */,
 				CD4FB04D28ADCFB900883EE5 /* Memo.swift */,
 			);
 			path = MemoDemo;
@@ -269,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD63806828B305E200FEDAC4 /* MemoListTableViewCell.swift in Sources */,
 				CD63806328B3032000FEDAC4 /* MemoListViewController.swift in Sources */,
 				CD638F6F28ACD7EE006218A9 /* AppDelegate.swift in Sources */,
 				CD638F7128ACD7EE006218A9 /* SceneDelegate.swift in Sources */,
