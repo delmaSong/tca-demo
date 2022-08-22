@@ -47,11 +47,12 @@ final class MemoDetailViewController: UIViewController {
         }
         
         memoTextView.text = viewStore.memo?.contents
-        memoTextView.isEditable = viewStore.memo == nil && viewStore.status != .normal
         
         viewStore.publisher.status
             .sink { [weak self] status in
-                let title = status == .normal ? "편집" : "저장"
+                let isNormal = status == .normal
+                let title = isNormal ? "편집" : "저장"
+                self?.memoTextView.isEditable = !isNormal
                 
                 self?.navigationItem.rightBarButtonItem = UIBarButtonItem(
                     title: title,
