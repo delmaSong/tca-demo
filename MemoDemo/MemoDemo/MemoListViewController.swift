@@ -22,6 +22,18 @@ final class MemoListViewController: UIViewController {
         return view
     }()
     
+    private lazy var addButton: UIButton = {
+       let view = UIButton()
+        view.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
+        view.tintColor = .systemPink
+        view.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+        
+        var configuration = UIButton.Configuration.plain()
+        configuration.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(pointSize: 40)
+        view.configuration = configuration
+        return view
+    }()
+    
     init(store: Store<MemoListState, MemoListAction>) {
       self.viewStore = ViewStore(store)
       super.init(nibName: nil, bundle: nil)
@@ -39,15 +51,39 @@ final class MemoListViewController: UIViewController {
     
     private func configure() {
         view.backgroundColor = .white
-        
         navigationController?.navigationBar.topItem?.title = "목록"
         
+        addSubviews()
+        configureConstraints()
+    }
+    
+    private func addSubviews() {
         view.addSubview(memoListTableView)
-        
+        view.addSubview(addButton)
+    }
+    
+    private func configureConstraints() {
         memoListTableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
             make.leading.trailing.bottom.equalTo(view)
         }
+        addButton.snp.makeConstraints { make in
+            make.trailing.bottom.equalTo(view).inset(22)
+            make.width.height.equalTo(60)
+        }
+    }
+    
+    @objc private func addButtonTapped() {
+        let detailVC = MemoDetailViewController(
+            store: Store(
+                initialState: ViewerState(
+                    status: .edit,
+                    memo: nil),
+                reducer: viewerReducer,
+                environment: ViewerEnvironment()
+            )
+        )
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 

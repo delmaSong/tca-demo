@@ -52,7 +52,7 @@ let memoListReducer = Reducer<MemoListState, MemoListAction, MemoListEnvironment
 
 struct ViewerState: Equatable {
     var status: ViewerStatus = .normal
-    var memo: MemoState
+    var memo: MemoState?
     
     enum ViewerStatus {
         case edit, normal

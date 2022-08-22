@@ -44,6 +44,6 @@ final class MemoDetailViewController: UIViewController {
             make.leading.trailing.bottom.equalTo(view)
         }
         
-        memoTextView.text = viewStore.memo.contents
+        memoTextView.text = viewStore.memo?.contents
     }
 }
