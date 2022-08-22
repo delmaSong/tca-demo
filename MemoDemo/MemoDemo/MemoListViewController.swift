@@ -27,6 +27,7 @@ final class MemoListViewController: UIViewController {
         view.register(MemoListTableViewCell.self, forCellReuseIdentifier: MemoListTableViewCell.identifier)
         view.dataSource = self
         view.delegate = self
+        view.rowHeight = 80
         return view
     }()
     

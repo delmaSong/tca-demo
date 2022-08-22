@@ -15,9 +15,10 @@ final class MemoListTableViewCell: UITableViewCell {
     
     private lazy var likeButton: UIButton = {
         let view = UIButton()
-        view.imageView?.image = UIImage(named: "star")
-        view.tintColor = .yellow
-        view.imageView?.contentMode = .scaleAspectFit
+        view.setImage(UIImage(systemName: "star"), for: .normal)
+        view.setImage(UIImage(systemName: "star.fill"), for: .selected)
+        view.tintColor = .blue
+        view.imageView?.contentMode = .scaleAspectFill
         view.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         return view
     }()
@@ -53,7 +54,7 @@ final class MemoListTableViewCell: UITableViewCell {
             make.leading.equalTo(contentView).offset(18)
             make.centerY.equalTo(contentView)
             make.top.bottom.equalTo(contentView).inset(12)
-            make.width.height.equalTo(25)
+            make.width.equalTo(likeButton.snp.height)
         }
         
         memoLabel.snp.makeConstraints { make in
@@ -64,7 +65,9 @@ final class MemoListTableViewCell: UITableViewCell {
     }
     
     @objc private func likeButtonTapped() {
-        likeButton.imageView?.image = likeButton.isSelected ? UIImage(named: "star.fill") : UIImage(named: "star")
+        likeButton.isSelected.toggle()
+        
+        // TODO: 값 바꾸는 요청 보내야 함
     }
     
     func configure(with memo: MemoState) {
