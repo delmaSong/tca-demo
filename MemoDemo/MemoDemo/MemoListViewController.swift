@@ -65,7 +65,15 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     let detailVC = MemoDetailViewController()
+        let detailVC = MemoDetailViewController(
+            store: Store(
+                initialState: ViewerState(
+                    status: .normal,
+                    memo: viewStore.memos[indexPath.row]),
+                reducer: viewerReducer,
+                environment: ViewerEnvironment()
+            )
+        )
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
