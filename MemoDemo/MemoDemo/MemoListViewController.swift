@@ -13,15 +13,6 @@ import SnapKit
 final class MemoListViewController: UIViewController {
     let viewStore: ViewStore<MemoListState, MemoListAction>
 
-    init(store: Store<MemoListState, MemoListAction>) {
-      self.viewStore = ViewStore(store)
-      super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private lazy var memoListTableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
         view.register(MemoListTableViewCell.self, forCellReuseIdentifier: MemoListTableViewCell.identifier)
@@ -30,6 +21,15 @@ final class MemoListViewController: UIViewController {
         view.rowHeight = 80
         return view
     }()
+    
+    init(store: Store<MemoListState, MemoListAction>) {
+      self.viewStore = ViewStore(store)
+      super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
