@@ -63,6 +63,6 @@ final class MemoDetailViewController: UIViewController {
     }
     
     @objc private func rightBarButtonTapped() {
-        viewStore.send(viewStore.status == .normal ? .editButtonTapped : .saveButtonTapped)
+        viewStore.send(viewStore.status == .normal ? .editButtonTapped : .saveButtonTapped(contents: memoTextView.text))
     }
 }

@@ -61,7 +61,7 @@ struct ViewerState: Equatable {
 
 enum ViewerAction {
     case editButtonTapped
-    case saveButtonTapped
+    case saveButtonTapped(contents: String)
     case memo(id: MemoState.ID)
 }
 
@@ -73,7 +73,7 @@ let viewerReducer = Reducer<ViewerState, ViewerAction, ViewerEnvironment> { stat
         state.status = .edit
         return .none
         
-    case .saveButtonTapped:
+    case .saveButtonTapped(let contents):
         state.status = .normal
         return .none
         
