@@ -11,9 +11,9 @@ import ComposableArchitecture
 import SnapKit
 
 final class MemoListViewController: UIViewController {
-    let viewStore: ViewStore<EditorState, EditorAction>
+    let viewStore: ViewStore<MemoListState, MemoListAction>
 
-    init(store: Store<EditorState, EditorAction>) {
+    init(store: Store<MemoListState, MemoListAction>) {
       self.viewStore = ViewStore(store)
       super.init(nibName: nil, bundle: nil)
     }

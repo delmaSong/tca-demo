@@ -7,6 +7,8 @@
 
 import ComposableArchitecture
 
+// MARK: - Memo
+
 struct MemoState: Hashable, Identifiable {
     var id = UUID()
     var contents = ""
@@ -27,25 +29,45 @@ let memoReducer = Reducer<MemoState, MemoAction, MemoEnvironment> { state, actio
     }
 }
 
-struct EditorState: Equatable {
-    var status: EditorStatus = .normal
+// MARK: - MemoList
+
+struct MemoListState: Equatable {
     var memos: IdentifiedArrayOf<MemoState> = []
+}
+
+enum MemoListAction {
+    case addButtonTapped
+}
+
+struct MemoListEnvironment {}
+
+let memoListReducer = Reducer<MemoListState, MemoListAction, MemoListEnvironment> { state, action, _ in
+    switch action {
+    case .addButtonTapped:
+        return .none
+    }
+}
+
+// MARK: - Viewer
+
+struct ViewerState: Equatable {
+    var status: ViewerStatus = .normal
+    var memo: MemoState
     
-    enum EditorStatus {
+    enum ViewerStatus {
         case edit, normal
     }
 }
 
-enum EditorAction {
+enum ViewerAction {
     case editButtonTapped
     case saveButtonTapped
-    case addButtonTapped
     case memo(id: MemoState.ID)
 }
 
-struct EditorEnvironment {}
+struct ViewerEnvironment {}
 
-let editorReducer = Reducer<EditorState, EditorAction, EditorEnvironment> { state, action, _ in
+let viewerReducer = Reducer<ViewerState, ViewerAction, ViewerEnvironment> { state, action, _ in
     switch action {
     case .editButtonTapped:
         state.status = .edit
@@ -53,11 +75,6 @@ let editorReducer = Reducer<EditorState, EditorAction, EditorEnvironment> { stat
         
     case .saveButtonTapped:
         state.status = .normal
-        return .none
-        
-    case .addButtonTapped:
-        state.status = .edit
-        // 저장 필요..
         return .none
         
     case .memo(let id):

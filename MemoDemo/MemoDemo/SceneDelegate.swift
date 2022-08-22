@@ -19,13 +19,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let viewController = MemoListViewController(
             store: Store(
-                initialState: EditorState(status: .normal, memos: [
-                    MemoState(id: UUID(), contents: "hi", isLiked: false),
-                    MemoState(id: UUID(), contents: "good", isLiked: true),
-                    MemoState(id: UUID(), contents: "thanks", isLiked: false)
-                ]),
-                reducer: editorReducer,
-                environment: EditorEnvironment()
+                initialState:
+                    MemoListState(memos: [
+                        MemoState(id: UUID(), contents: "hi", isLiked: false),
+                        MemoState(id: UUID(), contents: "good", isLiked: true),
+                        MemoState(id: UUID(), contents: "thanks", isLiked: false)
+                    ]),
+                reducer: memoListReducer,
+                environment: MemoListEnvironment()
             )
         )
         let navigation = UINavigationController(rootViewController: viewController)
