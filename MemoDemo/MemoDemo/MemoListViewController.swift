@@ -22,9 +22,11 @@ final class MemoListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private let memoListTableView: UITableView = {
+    private lazy var memoListTableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
         view.register(MemoListTableViewCell.self, forCellReuseIdentifier: MemoListTableViewCell.identifier)
+        view.dataSource = self
+        view.delegate = self
         return view
     }()
     
@@ -46,5 +48,20 @@ final class MemoListViewController: UIViewController {
             make.leading.trailing.bottom.equalTo(view)
         }
     }
+}
 
+// MARK: - UITableViewDataSource, UITableViewDelegate
+
+extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewStore.memos.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: MemoListTableViewCell.identifier, for: indexPath) as! MemoListTableViewCell
+        cell.configure(with: viewStore.memos[indexPath.row])
+        return cell
+    }
+    
+    
 }
