@@ -12,7 +12,7 @@ import Combine
 import SnapKit
 
 final class MemoDetailViewController: UIViewController {
-    let viewStore: ViewStore<ViewerState, ViewerAction>
+    let viewStore: ViewStore<MemoState, MemoAction>
     var cancellables: Set<AnyCancellable> = []
     
     private let memoTextView: UITextView = {
@@ -34,7 +34,7 @@ final class MemoDetailViewController: UIViewController {
         return view
     }()
     
-    init(store: Store<ViewerState, ViewerAction>) {
+    init(store: Store<MemoState, MemoAction>) {
         self.viewStore = ViewStore(store)
         super.init(nibName: nil, bundle: nil)
     }
@@ -51,11 +51,18 @@ final class MemoDetailViewController: UIViewController {
     
     private func configure() {
         view.backgroundColor = .white
-        memoTextView.text = viewStore.memo?.contents
+        memoTextView.text = viewStore.contents
         
         addSubviews()
         configureConstraints()
         bind()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "save",
+            style: UIBarButtonItem.Style.plain,
+            target: self,
+            action: #selector(rightBarButtonTapped)
+        )
     }
     
     private func addSubviews() {
@@ -76,24 +83,24 @@ final class MemoDetailViewController: UIViewController {
     }
     
     private func bind() {
-        viewStore.publisher.status
-            .sink { [weak self] status in
-                let isNormal = status == .normal
-                let title = isNormal ? "편집" : "저장"
-                self?.memoTextView.isEditable = !isNormal
-                self?.likeButton.isEnabled = isNormal
-                
-                self?.navigationItem.rightBarButtonItem = UIBarButtonItem(
-                    title: title,
-                    style: UIBarButtonItem.Style.plain,
-                    target: self,
-                    action: #selector(self?.rightBarButtonTapped)
-                )
-            }.store(in: &cancellables)
+//        viewStore.publisher.status
+//            .sink { [weak self] status in
+//                let isNormal = status == .normal
+//                let title = isNormal ? "편집" : "저장"
+//                self?.memoTextView.isEditable = !isNormal
+//                self?.likeButton.isEnabled = isNormal
+//
+//                self?.navigationItem.rightBarButtonItem = UIBarButtonItem(
+//                    title: title,
+//                    style: UIBarButtonItem.Style.plain,
+//                    target: self,
+//                    action: #selector(self?.rightBarButtonTapped)
+//                )
+//            }.store(in: &cancellables)
     }
     
     @objc private func rightBarButtonTapped() {
-        viewStore.send(viewStore.status == .normal ? .editButtonTapped : .saveButtonTapped(contents: memoTextView.text))
+        viewStore.send(.save(contents: memoTextView.text ?? ""))
     }
     
     @objc private func likeButtonTapped() {

@@ -17,6 +17,7 @@ struct MemoState: Hashable, Identifiable {
 
 enum MemoAction {
     case likeButtonTapped(id: UUID)
+    case save(contents: String)
 }
 
 struct MemoEnvironment {}
@@ -25,6 +26,10 @@ let memoReducer = Reducer<MemoState, MemoAction, MemoEnvironment> { state, actio
     switch action {
     case .likeButtonTapped(let id):
         state.isLiked.toggle()
+        return .none
+        
+    case .save(let contents):
+        state.contents = contents
         return .none
     }
 }
@@ -36,48 +41,61 @@ struct MemoListState: Equatable {
 }
 
 enum MemoListAction {
-    case addButtonTapped
+    case memo(id: UUID, action: MemoAction)
+    case add
 }
 
 struct MemoListEnvironment {}
 
-let memoListReducer = Reducer<MemoListState, MemoListAction, MemoListEnvironment> { state, action, _ in
-    switch action {
-    case .addButtonTapped:
-        return .none
+let memoListReducer = Reducer<MemoListState, MemoListAction, MemoListEnvironment>.combine(
+    memoReducer.forEach(
+        state: \MemoListState.memos,
+        action: /MemoListAction.memo(id:action:),
+        environment: { _ in MemoEnvironment() }
+    ),
+    
+    Reducer { state, action, _ in
+        switch action {
+        case .memo(let id, let action):
+            return .none
+            
+        case .add:
+            state.memos.insert(MemoState(), at: 0)
+            return .none
+        }
     }
-}
+)
 
 // MARK: - Viewer
 
 struct ViewerState: Equatable {
     var status: ViewerStatus = .normal
     var memo: MemoState?
-    
+
     enum ViewerStatus {
         case edit, normal
     }
 }
-
-enum ViewerAction {
-    case editButtonTapped
-    case saveButtonTapped(contents: String)
-    case memo(id: MemoState.ID)
-}
-
-struct ViewerEnvironment {}
-
-let viewerReducer = Reducer<ViewerState, ViewerAction, ViewerEnvironment> { state, action, _ in
-    switch action {
-    case .editButtonTapped:
-        state.status = .edit
-        return .none
-        
-    case .saveButtonTapped(let contents):
-        state.status = .normal
-        return .none
-        
-    case .memo(let id):
-        return .none
-    }
-}
+//
+//enum ViewerAction {
+//    case editButtonTapped
+//    case saveButtonTapped(contents: String)
+//    case memo(id: MemoState.ID)
+//}
+//
+//struct ViewerEnvironment {}
+//
+//let viewerReducer = Reducer<ViewerState, ViewerAction, ViewerEnvironment> { state, action, _ in
+//    switch action {
+//    case .editButtonTapped:
+//        state.status = .edit
+//        return .none
+//
+//    case .saveButtonTapped(let contents):
+//        state.status = .normal
+//        return .none
+//
+//    case .memo(let id):
+//        return .none
+//    }
+//}

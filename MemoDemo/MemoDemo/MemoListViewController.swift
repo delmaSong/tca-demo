@@ -7,12 +7,15 @@
 
 import UIKit
 
+import Combine
 import ComposableArchitecture
 import SnapKit
 
 final class MemoListViewController: UIViewController {
+    let store: Store<MemoListState, MemoListAction>
     let viewStore: ViewStore<MemoListState, MemoListAction>
-
+    var cancellables: Set<AnyCancellable> = []
+    
     private lazy var memoListTableView: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
         view.register(MemoListTableViewCell.self, forCellReuseIdentifier: MemoListTableViewCell.identifier)
@@ -23,7 +26,7 @@ final class MemoListViewController: UIViewController {
     }()
     
     private lazy var addButton: UIButton = {
-       let view = UIButton()
+        let view = UIButton()
         view.setImage(UIImage(systemName: "plus.circle.fill"), for: .normal)
         view.tintColor = .systemPink
         view.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
@@ -35,8 +38,9 @@ final class MemoListViewController: UIViewController {
     }()
     
     init(store: Store<MemoListState, MemoListAction>) {
-      self.viewStore = ViewStore(store)
-      super.init(nibName: nil, bundle: nil)
+        self.store = store
+        self.viewStore = ViewStore(store)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -45,7 +49,7 @@ final class MemoListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configure()
     }
     
@@ -55,6 +59,12 @@ final class MemoListViewController: UIViewController {
         
         addSubviews()
         configureConstraints()
+        
+        viewStore.publisher.memos
+            .sink(receiveValue: { [weak self] _ in
+                self?.memoListTableView.reloadData()
+            })
+            .store(in: &cancellables)
     }
     
     private func addSubviews() {
@@ -74,15 +84,17 @@ final class MemoListViewController: UIViewController {
     }
     
     @objc private func addButtonTapped() {
+        viewStore.send(.add)
+
         let detailVC = MemoDetailViewController(
-            store: Store(
-                initialState: ViewerState(
-                    status: .edit,
-                    memo: nil),
-                reducer: viewerReducer,
-                environment: ViewerEnvironment()
+            store: store.scope(
+                state: \.memos[0],
+                action: {
+                    .memo(id: self.viewStore.memos[0].id, action: $0)
+                }
             )
         )
+
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
@@ -101,15 +113,16 @@ extension MemoListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let memo = viewStore.memos[indexPath.row]
         let detailVC = MemoDetailViewController(
-            store: Store(
-                initialState: ViewerState(
-                    status: .normal,
-                    memo: viewStore.memos[indexPath.row]),
-                reducer: viewerReducer,
-                environment: ViewerEnvironment()
+            store: store.scope(
+                state: \.memos[indexPath.row],
+                action: {
+                    .memo(id: memo.id, action: $0)
+                }
             )
         )
+
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
