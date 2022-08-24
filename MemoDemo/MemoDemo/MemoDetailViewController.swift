@@ -83,20 +83,11 @@ final class MemoDetailViewController: UIViewController {
     }
     
     private func bind() {
-//        viewStore.publisher.status
-//            .sink { [weak self] status in
-//                let isNormal = status == .normal
-//                let title = isNormal ? "편집" : "저장"
-//                self?.memoTextView.isEditable = !isNormal
-//                self?.likeButton.isEnabled = isNormal
-//
-//                self?.navigationItem.rightBarButtonItem = UIBarButtonItem(
-//                    title: title,
-//                    style: UIBarButtonItem.Style.plain,
-//                    target: self,
-//                    action: #selector(self?.rightBarButtonTapped)
-//                )
-//            }.store(in: &cancellables)
+        viewStore.publisher.isLiked
+            .sink { [weak self] isLiked in
+                self?.likeButton.isSelected = isLiked
+            }
+            .store(in: &cancellables)
     }
     
     @objc private func rightBarButtonTapped() {
@@ -105,5 +96,6 @@ final class MemoDetailViewController: UIViewController {
     
     @objc private func likeButtonTapped() {
         likeButton.isSelected.toggle()
+        viewStore.send(.like)
     }
 }

@@ -16,7 +16,7 @@ struct MemoState: Hashable, Identifiable {
 }
 
 enum MemoAction {
-    case likeButtonTapped(id: UUID)
+    case like
     case save(contents: String)
 }
 
@@ -24,7 +24,7 @@ struct MemoEnvironment {}
 
 let memoReducer = Reducer<MemoState, MemoAction, MemoEnvironment> { state, action, _ in
     switch action {
-    case .likeButtonTapped(let id):
+    case .like:
         state.isLiked.toggle()
         return .none
         
