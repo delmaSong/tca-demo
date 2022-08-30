@@ -14,6 +14,7 @@
 		CDD8205F28BD9EEC0014217A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD8205D28BD9EEC0014217A /* LaunchScreen.storyboard */; };
 		CDD8206828BDB42D0014217A /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = CDD8206728BDB42D0014217A /* ComposableArchitecture */; };
 		CDD8206B28BDB44B0014217A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CDD8206A28BDB44B0014217A /* SnapKit */; };
+		CDD8207028BDF5BB0014217A /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8206F28BDF5BB0014217A /* UIView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		CDD8205B28BD9EEC0014217A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDD8205E28BD9EEC0014217A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDD8206028BD9EEC0014217A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDD8206F28BDF5BB0014217A /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				CDD8205B28BD9EEC0014217A /* Assets.xcassets */,
 				CDD8205D28BD9EEC0014217A /* LaunchScreen.storyboard */,
 				CDD8206028BD9EEC0014217A /* Info.plist */,
+				CDD8206F28BDF5BB0014217A /* UIView+Extension.swift */,
 			);
 			path = "tca-pokemon";
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			files = (
 				CDD8205728BD9EEA0014217A /* ViewController.swift in Sources */,
 				CDD8205328BD9EEA0014217A /* AppDelegate.swift in Sources */,
+				CDD8207028BDF5BB0014217A /* UIView+Extension.swift in Sources */,
 				CDD8205528BD9EEA0014217A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
