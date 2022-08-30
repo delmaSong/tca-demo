@@ -10,9 +10,10 @@
 		CDD8205328BD9EEA0014217A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8205228BD9EEA0014217A /* AppDelegate.swift */; };
 		CDD8205528BD9EEA0014217A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8205428BD9EEA0014217A /* SceneDelegate.swift */; };
 		CDD8205728BD9EEA0014217A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8205628BD9EEA0014217A /* ViewController.swift */; };
-		CDD8205A28BD9EEA0014217A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD8205828BD9EEA0014217A /* Main.storyboard */; };
 		CDD8205C28BD9EEC0014217A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD8205B28BD9EEC0014217A /* Assets.xcassets */; };
 		CDD8205F28BD9EEC0014217A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD8205D28BD9EEC0014217A /* LaunchScreen.storyboard */; };
+		CDD8206828BDB42D0014217A /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = CDD8206728BDB42D0014217A /* ComposableArchitecture */; };
+		CDD8206B28BDB44B0014217A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CDD8206A28BDB44B0014217A /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,7 +21,6 @@
 		CDD8205228BD9EEA0014217A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDD8205428BD9EEA0014217A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CDD8205628BD9EEA0014217A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CDD8205928BD9EEA0014217A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CDD8205B28BD9EEC0014217A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDD8205E28BD9EEC0014217A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDD8206028BD9EEC0014217A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -31,6 +31,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD8206828BDB42D0014217A /* ComposableArchitecture in Frameworks */,
+				CDD8206B28BDB44B0014217A /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +61,6 @@
 				CDD8205228BD9EEA0014217A /* AppDelegate.swift */,
 				CDD8205428BD9EEA0014217A /* SceneDelegate.swift */,
 				CDD8205628BD9EEA0014217A /* ViewController.swift */,
-				CDD8205828BD9EEA0014217A /* Main.storyboard */,
 				CDD8205B28BD9EEC0014217A /* Assets.xcassets */,
 				CDD8205D28BD9EEC0014217A /* LaunchScreen.storyboard */,
 				CDD8206028BD9EEC0014217A /* Info.plist */,
@@ -83,6 +84,10 @@
 			dependencies = (
 			);
 			name = "tca-pokemon";
+			packageProductDependencies = (
+				CDD8206728BDB42D0014217A /* ComposableArchitecture */,
+				CDD8206A28BDB44B0014217A /* SnapKit */,
+			);
 			productName = "tca-pokemon";
 			productReference = CDD8204F28BD9EEA0014217A /* tca-pokemon.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +116,10 @@
 				Base,
 			);
 			mainGroup = CDD8204628BD9EEA0014217A;
+			packageReferences = (
+				CDD8206628BDB42D0014217A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				CDD8206928BDB44B0014217A /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = CDD8205028BD9EEA0014217A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +136,6 @@
 			files = (
 				CDD8205F28BD9EEC0014217A /* LaunchScreen.storyboard in Resources */,
 				CDD8205C28BD9EEC0014217A /* Assets.xcassets in Resources */,
-				CDD8205A28BD9EEA0014217A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,14 +155,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CDD8205828BD9EEA0014217A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CDD8205928BD9EEA0014217A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CDD8205D28BD9EEC0014217A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +292,6 @@
 				INFOPLIST_FILE = "tca-pokemon/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,7 +319,6 @@
 				INFOPLIST_FILE = "tca-pokemon/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -358,6 +356,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CDD8206628BDB42D0014217A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		CDD8206928BDB44B0014217A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CDD8206728BDB42D0014217A /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDD8206628BDB42D0014217A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		CDD8206A28BDB44B0014217A /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDD8206928BDB44B0014217A /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CDD8204728BD9EEA0014217A /* Project object */;
 }
