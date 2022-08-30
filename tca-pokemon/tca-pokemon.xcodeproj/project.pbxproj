@@ -12,6 +12,8 @@
 		CDD8205728BD9EEA0014217A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8205628BD9EEA0014217A /* ViewController.swift */; };
 		CDD8205C28BD9EEC0014217A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD8205B28BD9EEC0014217A /* Assets.xcassets */; };
 		CDD8205F28BD9EEC0014217A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD8205D28BD9EEC0014217A /* LaunchScreen.storyboard */; };
+		CDD8206828BDB42D0014217A /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = CDD8206728BDB42D0014217A /* ComposableArchitecture */; };
+		CDD8206B28BDB44B0014217A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CDD8206A28BDB44B0014217A /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD8206828BDB42D0014217A /* ComposableArchitecture in Frameworks */,
+				CDD8206B28BDB44B0014217A /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +84,10 @@
 			dependencies = (
 			);
 			name = "tca-pokemon";
+			packageProductDependencies = (
+				CDD8206728BDB42D0014217A /* ComposableArchitecture */,
+				CDD8206A28BDB44B0014217A /* SnapKit */,
+			);
 			productName = "tca-pokemon";
 			productReference = CDD8204F28BD9EEA0014217A /* tca-pokemon.app */;
 			productType = "com.apple.product-type.application";
@@ -108,6 +116,10 @@
 				Base,
 			);
 			mainGroup = CDD8204628BD9EEA0014217A;
+			packageReferences = (
+				CDD8206628BDB42D0014217A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				CDD8206928BDB44B0014217A /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = CDD8205028BD9EEA0014217A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -344,6 +356,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CDD8206628BDB42D0014217A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		CDD8206928BDB44B0014217A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CDD8206728BDB42D0014217A /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDD8206628BDB42D0014217A /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		CDD8206A28BDB44B0014217A /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CDD8206928BDB44B0014217A /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CDD8204728BD9EEA0014217A /* Project object */;
 }
