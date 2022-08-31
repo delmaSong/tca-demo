@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CD8AB54028BEFDDD00C1BCCB /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8AB53F28BEFDDD00C1BCCB /* ItemCollectionViewCell.swift */; };
+		CD8AB54228BF049800C1BCCB /* TypesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8AB54128BF049800C1BCCB /* TypesCollectionViewCell.swift */; };
 		CDD8205328BD9EEA0014217A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8205228BD9EEA0014217A /* AppDelegate.swift */; };
 		CDD8205528BD9EEA0014217A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8205428BD9EEA0014217A /* SceneDelegate.swift */; };
 		CDD8205728BD9EEA0014217A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8205628BD9EEA0014217A /* ViewController.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		CD8AB53F28BEFDDD00C1BCCB /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		CD8AB54128BF049800C1BCCB /* TypesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesCollectionViewCell.swift; sourceTree = "<group>"; };
 		CDD8204F28BD9EEA0014217A /* tca-pokemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "tca-pokemon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD8205228BD9EEA0014217A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDD8205428BD9EEA0014217A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			children = (
 				CDD8206D28BDB8EC0014217A /* PokemonInfoCollectionViewCell.swift */,
 				CD8AB53F28BEFDDD00C1BCCB /* ItemCollectionViewCell.swift */,
+				CD8AB54128BF049800C1BCCB /* TypesCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 				CDD8205328BD9EEA0014217A /* AppDelegate.swift in Sources */,
 				CDD8206E28BDB8EC0014217A /* PokemonInfoCollectionViewCell.swift in Sources */,
 				CDD8207028BDF5BB0014217A /* UIView+Extension.swift in Sources */,
+				CD8AB54228BF049800C1BCCB /* TypesCollectionViewCell.swift in Sources */,
 				CDD8205528BD9EEA0014217A /* SceneDelegate.swift in Sources */,
 				CDD8207228BE01DB0014217A /* PokemonInfo.swift in Sources */,
 				CD8AB54028BEFDDD00C1BCCB /* ItemCollectionViewCell.swift in Sources */,
