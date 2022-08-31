@@ -16,6 +16,7 @@
 		CDD8206B28BDB44B0014217A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CDD8206A28BDB44B0014217A /* SnapKit */; };
 		CDD8206E28BDB8EC0014217A /* PokemonInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8206D28BDB8EC0014217A /* PokemonInfoCollectionViewCell.swift */; };
 		CDD8207028BDF5BB0014217A /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8206F28BDF5BB0014217A /* UIView+Extension.swift */; };
+		CDD8207228BE01DB0014217A /* PokemonInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD8207128BE01DB0014217A /* PokemonInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		CDD8206028BD9EEC0014217A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDD8206D28BDB8EC0014217A /* PokemonInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		CDD8206F28BDF5BB0014217A /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		CDD8207128BE01DB0014217A /* PokemonInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				CDD8205D28BD9EEC0014217A /* LaunchScreen.storyboard */,
 				CDD8206028BD9EEC0014217A /* Info.plist */,
 				CDD8206F28BDF5BB0014217A /* UIView+Extension.swift */,
+				CDD8207128BE01DB0014217A /* PokemonInfo.swift */,
 			);
 			path = "tca-pokemon";
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 				CDD8206E28BDB8EC0014217A /* PokemonInfoCollectionViewCell.swift in Sources */,
 				CDD8207028BDF5BB0014217A /* UIView+Extension.swift in Sources */,
 				CDD8205528BD9EEA0014217A /* SceneDelegate.swift in Sources */,
+				CDD8207228BE01DB0014217A /* PokemonInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
