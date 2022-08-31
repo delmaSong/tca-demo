@@ -38,6 +38,13 @@ final class ViewController: UIViewController {
     
     private let wholeScrollView = UIScrollView()
     
+    private let pokemonsLabel: UILabel = {
+        let view = UILabel()
+        view.text = "Pokemons"
+        view.font = .systemFont(ofSize: 32, weight: .bold)
+        return view
+    }()
+    
     private lazy var pokemonInfoCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let frameWidth = UIScreen.main.bounds.width
@@ -57,7 +64,7 @@ final class ViewController: UIViewController {
     
     private let itemsLabel: UILabel = {
         let view = UILabel()
-        view.text = "items"
+        view.text = "Items"
         view.font = .systemFont(ofSize: 32, weight: .bold)
         return view
     }()
@@ -81,7 +88,7 @@ final class ViewController: UIViewController {
     
     private let typesLabel: UILabel = {
         let view = UILabel()
-        view.text = "types"
+        view.text = "Types"
         view.font = .systemFont(ofSize: 32, weight: .bold)
         return view
     }()
@@ -115,6 +122,7 @@ final class ViewController: UIViewController {
     private func addSubviews() {
         view.addSubview(wholeScrollView)
         wholeScrollView.addSubviews([
+            pokemonsLabel,
             pokemonInfoCollectionView,
             itemsLabel,
             itemCollectionView,
@@ -128,15 +136,19 @@ final class ViewController: UIViewController {
             make.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view)
         }
+        pokemonsLabel.snp.makeConstraints { make in
+            make.leading.equalTo(wholeScrollView).offset(32)
+            make.top.equalTo(wholeScrollView.contentLayoutGuide)
+            make.height.equalTo(60)
+        }
         pokemonInfoCollectionView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(view)
-            make.top.equalTo(wholeScrollView.contentLayoutGuide)
-            make.height.equalTo(UIScreen.main.bounds.width * 0.7)
+            make.top.equalTo(pokemonsLabel.snp.bottom)
+            make.height.equalTo(UIScreen.main.bounds.width * 0.6)
         }
         itemsLabel.snp.makeConstraints { make in
-            make.leading.equalTo(wholeScrollView).offset(32)
+            make.leading.height.equalTo(pokemonsLabel)
             make.top.equalTo(pokemonInfoCollectionView.snp.bottom).offset(22)
-            make.height.equalTo(80)
         }
         itemCollectionView.snp.makeConstraints { make in
             make.leading.trailing.equalTo(view)
@@ -144,13 +156,13 @@ final class ViewController: UIViewController {
             make.height.equalTo(130)
         }
         typesLabel.snp.makeConstraints { make in
-            make.leading.height.equalTo(itemsLabel)
-            make.top.equalTo(itemCollectionView.snp.bottom)
+            make.leading.height.equalTo(pokemonsLabel)
+            make.top.equalTo(itemCollectionView.snp.bottom).offset(22)
         }
         typeCollectionView.snp.makeConstraints { make in
             make.trailing.equalTo(view)
             make.leading.equalTo(view)
-            make.top.equalTo(typesLabel.snp.bottom)
+            make.top.equalTo(typesLabel.snp.bottom).offset(12)
             make.bottom.equalTo(wholeScrollView.contentLayoutGuide)
             make.height.equalTo(1000)
         }

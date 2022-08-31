@@ -39,7 +39,8 @@ final class TypesCollectionViewCell: UICollectionViewCell {
     }
     
     private func configure() {
-        contentView.backgroundColor = #colorLiteral(red: 0.8338067224, green: 0.9826433634, blue: 0.8538278354, alpha: 1)
+        contentView.layer.borderColor = UIColor.lightGray.cgColor
+        contentView.layer.borderWidth = 1.6
         contentView.layer.cornerRadius = 20
         
         addSubviews()
