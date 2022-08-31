@@ -14,3 +14,8 @@ struct PokemonInfoState {
     var isLiked: Bool
     var imageURL: String
 }
+
+struct AbilityTypeState {
+    var name: String
+    var pokemons: [String]
+}
