@@ -23,6 +23,17 @@ let items: [String] = [
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lemonade.png",
     ]
 
+let types: [AbilityTypeState] = [
+    AbilityTypeState(name: "전기", pokemons: ["피카츄", "라이츄", "에렉몬"]),
+    AbilityTypeState(name: "물", pokemons: ["꼬부기", "어니부기", "거북왕"]),
+    AbilityTypeState(name: "풀", pokemons: ["이상해씨", "이상해꽃", "이상해풀"]),
+    AbilityTypeState(name: "불", pokemons: ["파이리", "리자드", "리자몽"]),
+    AbilityTypeState(name: "전기", pokemons: ["피카츄", "라이츄", "에렉몬"]),
+    AbilityTypeState(name: "물", pokemons: ["꼬부기", "어니부기", "거북왕"]),
+    AbilityTypeState(name: "풀", pokemons: ["이상해씨", "이상해꽃", "이상해풀"]),
+    AbilityTypeState(name: "불", pokemons: ["파이리", "리자드", "리자몽"]),
+]
+
 final class ViewController: UIViewController {
     
     private let wholeScrollView = UIScrollView()
@@ -68,6 +79,25 @@ final class ViewController: UIViewController {
         return view
     }()
     
+    private let typesLabel: UILabel = {
+       let view = UILabel()
+        view.text = "types"
+        view.font = .systemFont(ofSize: 32, weight: .bold)
+        return view
+    }()
+    
+    private lazy var typeCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 120)
+        
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.register(
+            TypesCollectionViewCell.self,
+            forCellWithReuseIdentifier: TypesCollectionViewCell.identifier
+        )
+        view.dataSource = self
+        return view
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -86,7 +116,9 @@ final class ViewController: UIViewController {
             wholeScrollView,
             pokemonInfoCollectionView,
             itemsLabel,
-            itemCollectionView
+            itemCollectionView,
+            typesLabel,
+            typeCollectionView
         ])
     }
     
@@ -109,6 +141,15 @@ final class ViewController: UIViewController {
             make.top.equalTo(itemsLabel.snp.bottom)
             make.height.equalTo(130)
         }
+        typesLabel.snp.makeConstraints { make in
+            make.leading.height.equalTo(itemsLabel)
+            make.top.equalTo(itemCollectionView.snp.bottom)
+        }
+        typeCollectionView.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(wholeScrollView).inset(22)
+            make.top.equalTo(typesLabel.snp.bottom)
+            make.bottom.equalTo(wholeScrollView.contentLayoutGuide)
+        }
     }
     
 }
@@ -122,7 +163,7 @@ extension ViewController: UICollectionViewDataSource {
         } else if collectionView == itemCollectionView {
             return items.count
         } else {
-            return 0
+            return types.count
         }
     }
     
@@ -134,12 +175,19 @@ extension ViewController: UICollectionViewDataSource {
             ) as! PokemonInfoCollectionViewCell
             cell.configure(with: info[indexPath.item])
             return cell
-        } else {
+        } else if collectionView == itemCollectionView {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: ItemCollectionViewCell.identifier,
                 for: indexPath
             ) as! ItemCollectionViewCell
             cell.configure(item: items[indexPath.item])
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: TypesCollectionViewCell.identifier,
+                for: indexPath
+            ) as! TypesCollectionViewCell
+            cell.configure(with: types[indexPath.item])
             return cell
         }
     }
