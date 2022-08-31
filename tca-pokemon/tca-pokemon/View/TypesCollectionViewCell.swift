@@ -39,6 +39,9 @@ final class TypesCollectionViewCell: UICollectionViewCell {
     }
     
     private func configure() {
+        contentView.backgroundColor = #colorLiteral(red: 0.8338067224, green: 0.9826433634, blue: 0.8538278354, alpha: 1)
+        contentView.layer.cornerRadius = 20
+        
         addSubviews()
         configureConstraints()
     }
@@ -61,7 +64,7 @@ final class TypesCollectionViewCell: UICollectionViewCell {
     
     private func configurePokemonLabels(_ pokemon: String) {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         label.text = pokemon
         pokemonsStackView.addArrangedSubview(label)
     }

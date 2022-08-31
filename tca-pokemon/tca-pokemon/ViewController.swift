@@ -21,7 +21,7 @@ let items: [String] = [
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png",
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/premier-ball.png",
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lemonade.png",
-    ]
+]
 
 let types: [AbilityTypeState] = [
     AbilityTypeState(name: "전기", pokemons: ["피카츄", "라이츄", "에렉몬"]),
@@ -56,7 +56,7 @@ final class ViewController: UIViewController {
     }()
     
     private let itemsLabel: UILabel = {
-       let view = UILabel()
+        let view = UILabel()
         view.text = "items"
         view.font = .systemFont(ofSize: 32, weight: .bold)
         return view
@@ -80,7 +80,7 @@ final class ViewController: UIViewController {
     }()
     
     private let typesLabel: UILabel = {
-       let view = UILabel()
+        let view = UILabel()
         view.text = "types"
         view.font = .systemFont(ofSize: 32, weight: .bold)
         return view
@@ -88,7 +88,7 @@ final class ViewController: UIViewController {
     
     private lazy var typeCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 120)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 100)
         
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(
@@ -96,6 +96,7 @@ final class ViewController: UIViewController {
             forCellWithReuseIdentifier: TypesCollectionViewCell.identifier
         )
         view.dataSource = self
+        view.isScrollEnabled = false
         return view
     }()
     override func viewDidLoad() {
@@ -112,8 +113,8 @@ final class ViewController: UIViewController {
     }
     
     private func addSubviews() {
-        view.addSubviews([
-            wholeScrollView,
+        view.addSubview(wholeScrollView)
+        wholeScrollView.addSubviews([
             pokemonInfoCollectionView,
             itemsLabel,
             itemCollectionView,
@@ -124,10 +125,11 @@ final class ViewController: UIViewController {
     
     private func configureConstraints() {
         wholeScrollView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.top.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view)
         }
         pokemonInfoCollectionView.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(wholeScrollView)
+            make.leading.trailing.equalTo(view)
             make.top.equalTo(wholeScrollView.contentLayoutGuide)
             make.height.equalTo(UIScreen.main.bounds.width * 0.7)
         }
@@ -137,7 +139,7 @@ final class ViewController: UIViewController {
             make.height.equalTo(80)
         }
         itemCollectionView.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(wholeScrollView)
+            make.leading.trailing.equalTo(view)
             make.top.equalTo(itemsLabel.snp.bottom)
             make.height.equalTo(130)
         }
@@ -146,9 +148,11 @@ final class ViewController: UIViewController {
             make.top.equalTo(itemCollectionView.snp.bottom)
         }
         typeCollectionView.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(wholeScrollView).inset(22)
+            make.trailing.equalTo(view)
+            make.leading.equalTo(view)
             make.top.equalTo(typesLabel.snp.bottom)
             make.bottom.equalTo(wholeScrollView.contentLayoutGuide)
+            make.height.equalTo(1000)
         }
     }
     
