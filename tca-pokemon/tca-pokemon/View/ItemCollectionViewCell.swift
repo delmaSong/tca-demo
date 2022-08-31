@@ -11,12 +11,16 @@ import SnapKit
 
 final class ItemCollectionViewCell: UICollectionViewCell {
     
+    static let identifier = String(describing: ItemCollectionViewCell.self)
+    
     private let roundBackgroundView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 50
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowRadius = 50
-        view.layer.shadowOpacity = 1
+        view.layer.shadowColor = UIColor.gray.cgColor
+        view.layer.shadowRadius = 4
+        view.layer.shadowOpacity = 0.4
+        view.layer.shadowOffset = CGSize(width: 6, height: 10)
+        view.backgroundColor = .white
         return view
     }()
     
@@ -50,7 +54,7 @@ final class ItemCollectionViewCell: UICollectionViewCell {
             make.edges.equalTo(contentView)
         }
         itemImageView.snp.makeConstraints { make in
-            make.edges.equalTo(contentView).offset(12)
+            make.edges.equalTo(contentView)
         }
     }
     

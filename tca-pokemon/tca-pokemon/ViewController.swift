@@ -16,13 +16,16 @@ let info: [PokemonInfoState] = [
     PokemonInfoState(name: "꼬부기", stat: "99", type: "전기", isLiked: false, imageURL: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png"),
 ]
 
+let items: [String] = [
+    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/master-ball.png",
+    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png",
+    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/premier-ball.png",
+    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lemonade.png",
+    ]
+
 final class ViewController: UIViewController {
     
-    private let wholeScrollView: UIScrollView = {
-        let view = UIScrollView()
-        view.backgroundColor = .systemPink
-        return view
-    }()
+    private let wholeScrollView = UIScrollView()
     
     private lazy var pokemonInfoCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -37,6 +40,31 @@ final class ViewController: UIViewController {
             forCellWithReuseIdentifier: PokemonInfoCollectionViewCell.identifier
         )
         view.dataSource = self
+        view.showsHorizontalScrollIndicator = false
+        return view
+    }()
+    
+    private let itemsLabel: UILabel = {
+       let view = UILabel()
+        view.text = "items"
+        view.font = .systemFont(ofSize: 32, weight: .bold)
+        return view
+    }()
+    
+    private lazy var itemCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 100, height: 100)
+        layout.scrollDirection = .horizontal
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+        layout.minimumLineSpacing = 22
+        
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.register(
+            ItemCollectionViewCell.self,
+            forCellWithReuseIdentifier: ItemCollectionViewCell.identifier
+        )
+        view.dataSource = self
+        view.showsHorizontalScrollIndicator = false
         return view
     }()
     
@@ -54,7 +82,12 @@ final class ViewController: UIViewController {
     }
     
     private func addSubviews() {
-        view.addSubviews([wholeScrollView, pokemonInfoCollectionView])
+        view.addSubviews([
+            wholeScrollView,
+            pokemonInfoCollectionView,
+            itemsLabel,
+            itemCollectionView
+        ])
     }
     
     private func configureConstraints() {
@@ -66,6 +99,16 @@ final class ViewController: UIViewController {
             make.top.equalTo(wholeScrollView.contentLayoutGuide)
             make.height.equalTo(UIScreen.main.bounds.width * 0.7)
         }
+        itemsLabel.snp.makeConstraints { make in
+            make.leading.equalTo(wholeScrollView).offset(32)
+            make.top.equalTo(pokemonInfoCollectionView.snp.bottom).offset(22)
+            make.height.equalTo(80)
+        }
+        itemCollectionView.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(wholeScrollView)
+            make.top.equalTo(itemsLabel.snp.bottom)
+            make.height.equalTo(130)
+        }
     }
     
 }
@@ -74,16 +117,31 @@ final class ViewController: UIViewController {
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        info.count
+        if collectionView == pokemonInfoCollectionView {
+            return info.count
+        } else if collectionView == itemCollectionView {
+            return items.count
+        } else {
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: PokemonInfoCollectionViewCell.identifier,
-            for: indexPath
-        ) as! PokemonInfoCollectionViewCell
-        cell.configure(with: info[indexPath.item])
-        return cell
+        if collectionView == pokemonInfoCollectionView {
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: PokemonInfoCollectionViewCell.identifier,
+                for: indexPath
+            ) as! PokemonInfoCollectionViewCell
+            cell.configure(with: info[indexPath.item])
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: ItemCollectionViewCell.identifier,
+                for: indexPath
+            ) as! ItemCollectionViewCell
+            cell.configure(item: items[indexPath.item])
+            return cell
+        }
     }
     
 }
