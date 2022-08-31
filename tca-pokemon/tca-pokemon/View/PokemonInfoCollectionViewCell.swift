@@ -110,4 +110,23 @@ final class PokemonInfoCollectionViewCell: UICollectionViewCell {
     @objc private func likeButtonTapped() {
         
     }
+    
+    func configure(with info: PokemonInfoState) {
+        backgroundColoredView.backgroundColor = UIColor(
+            red: .random(in: 0...1),
+            green: .random(in: 0...1),
+            blue: .random(in: 0...1),
+            alpha: 0.3
+        )
+        nameLabel.text = info.name
+        statLabel.text = "Stat: \(info.stat)"
+        typeLabel.text = "Type: \(info.type)"
+        likeButton.isSelected = info.isLiked
+        
+        guard let url = URL(string: info.imageURL) else { return }
+        do {
+            let data = try Data(contentsOf: url)
+            pokemonImageView.image = UIImage(data: data)
+        } catch { }
+    }
 }
