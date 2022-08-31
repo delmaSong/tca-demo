@@ -11,7 +11,13 @@ import SnapKit
 
 final class PokemonInfoCollectionViewCell: UICollectionViewCell {
    
-    private let backgroundColoredView = UIView()
+    static let identifier = String(describing: PokemonInfoCollectionViewCell.self)
+    
+    private let backgroundColoredView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 20
+        return view
+    }()
     
     private let pokemonImageView: UIImageView = {
         let view = UIImageView()
@@ -21,20 +27,19 @@ final class PokemonInfoCollectionViewCell: UICollectionViewCell {
     
     private let nameLabel: UILabel = {
         let view = UILabel()
-        view.font = .systemFont(ofSize: 18, weight: .semibold)
+        view.font = .systemFont(ofSize: 22, weight: .bold)
         return view
     }()
     
     private let statLabel: UILabel = {
         let view = UILabel()
-        view.font = .systemFont(ofSize: 14, weight: .medium)
+        view.font = .systemFont(ofSize: 16, weight: .semibold)
         return view
     }()
     
-    
     private let typeLabel: UILabel = {
         let view = UILabel()
-        view.font = .systemFont(ofSize: 14, weight: .medium)
+        view.font = .systemFont(ofSize: 16, weight: .semibold)
         return view
     }()
     
@@ -75,23 +80,26 @@ final class PokemonInfoCollectionViewCell: UICollectionViewCell {
     
     private func configureConstraints() {
         backgroundColoredView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalTo(contentView)
-            make.top.equalTo(contentView).offset(24)
+            make.leading.equalTo(contentView)
+            make.top.equalTo(contentView).offset(40)
+            make.trailing.bottom.equalTo(contentView).offset(-6)
         }
         pokemonImageView.snp.makeConstraints { make in
-            make.top.trailing.bottom.equalTo(contentView).offset(12)
+            make.top.trailing.bottom.equalTo(contentView)
+            make.width.equalTo(pokemonImageView.snp.height)
         }
         nameLabel.snp.makeConstraints { make in
-            make.top.leading.equalTo(backgroundColoredView).offset(12)
+            make.top.equalTo(backgroundColoredView).offset(32)
+            make.leading.equalTo(contentView).offset(12)
         }
         statLabel.snp.makeConstraints { make in
             make.leading.equalTo(nameLabel)
-            make.top.equalTo(nameLabel).offset(8)
+            make.top.equalTo(nameLabel.snp.bottom).offset(8)
         }
         typeLabel.snp.makeConstraints { make in
             make.leading.equalTo(nameLabel)
-            make.top.equalTo(statLabel).offset(8)
-            make.bottom.greaterThanOrEqualTo(backgroundColoredView).offset(12)
+            make.top.equalTo(statLabel.snp.bottom).offset(8)
+            make.bottom.lessThanOrEqualTo(backgroundColoredView).offset(12)
         }
         likeButton.snp.makeConstraints { make in
             make.trailing.bottom.equalTo(pokemonImageView)
