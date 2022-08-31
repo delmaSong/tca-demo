@@ -49,6 +49,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD8AB54328BF27E500C1BCCB /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CDD8206F28BDF5BB0014217A /* UIView+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		CD8AB54428BF27EF00C1BCCB /* State */ = {
+			isa = PBXGroup;
+			children = (
+				CDD8207128BE01DB0014217A /* PokemonInfo.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
+		CD8AB54528BF27F800C1BCCB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CDD8205628BD9EEA0014217A /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		CDD8204628BD9EEA0014217A = {
 			isa = PBXGroup;
 			children = (
@@ -68,15 +92,15 @@
 		CDD8205128BD9EEA0014217A /* tca-pokemon */ = {
 			isa = PBXGroup;
 			children = (
+				CD8AB54528BF27F800C1BCCB /* Controller */,
+				CD8AB54428BF27EF00C1BCCB /* State */,
+				CD8AB54328BF27E500C1BCCB /* Extension */,
 				CDD8206C28BDB7350014217A /* View */,
 				CDD8205228BD9EEA0014217A /* AppDelegate.swift */,
 				CDD8205428BD9EEA0014217A /* SceneDelegate.swift */,
-				CDD8205628BD9EEA0014217A /* ViewController.swift */,
 				CDD8205B28BD9EEC0014217A /* Assets.xcassets */,
 				CDD8205D28BD9EEC0014217A /* LaunchScreen.storyboard */,
 				CDD8206028BD9EEC0014217A /* Info.plist */,
-				CDD8206F28BDF5BB0014217A /* UIView+Extension.swift */,
-				CDD8207128BE01DB0014217A /* PokemonInfo.swift */,
 			);
 			path = "tca-pokemon";
 			sourceTree = "<group>";
