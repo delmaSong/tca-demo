@@ -45,9 +45,10 @@ final class PokemonInfoCollectionViewCell: UICollectionViewCell {
     
     private lazy var likeButton: UIButton = {
         let view = UIButton()
-        view.setImage(UIImage(named: "heart"), for: .normal)
-        view.setImage(UIImage(named: "heart.fill"), for: .selected)
+        view.setImage(UIImage(systemName: "heart"), for: .normal)
+        view.setImage(UIImage(systemName: "heart.fill"), for: .selected)
         view.tintColor = .red
+        view.imageView?.contentMode = .scaleAspectFill
         view.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         return view
     }()
@@ -102,13 +103,14 @@ final class PokemonInfoCollectionViewCell: UICollectionViewCell {
             make.bottom.lessThanOrEqualTo(backgroundColoredView).offset(12)
         }
         likeButton.snp.makeConstraints { make in
-            make.trailing.bottom.equalTo(pokemonImageView)
-            make.width.height.equalTo(32)
+            make.bottom.equalTo(backgroundColoredView).offset(-12)
+            make.leading.equalTo(nameLabel)
+            make.width.height.equalTo(22)
         }
     }
     
     @objc private func likeButtonTapped() {
-        
+        likeButton.isSelected.toggle()
     }
     
     func configure(with info: PokemonInfoState) {
