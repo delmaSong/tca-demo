@@ -42,10 +42,10 @@ struct Pokemon: Decodable {
     }
 }
 
-struct Item: Decodable {
+struct Item: Decodable, Equatable {
     var sprites: Sprites
     
-    struct Sprites: Decodable {
+    struct Sprites: Decodable, Equatable {
         var `default`: String
     }
 }

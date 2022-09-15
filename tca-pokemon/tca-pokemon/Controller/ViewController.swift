@@ -8,33 +8,12 @@
 import UIKit
 
 import SnapKit
-
-let info: [PokemonInfoState] = [
-    PokemonInfoState(name: "피카츄", stat: "99", type: "전기", isLiked: false, imageURL: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/22.png"),
-    PokemonInfoState(name: "라이츄", stat: "99", type: "전기", isLiked: false, imageURL: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png"),
-    PokemonInfoState(name: "파이리", stat: "99", type: "전기", isLiked: false, imageURL: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png"),
-    PokemonInfoState(name: "꼬부기", stat: "99", type: "전기", isLiked: false, imageURL: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png"),
-]
-
-let items: [String] = [
-    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/master-ball.png",
-    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png",
-    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/premier-ball.png",
-    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/lemonade.png",
-]
-
-let types: [AbilityTypeState] = [
-    AbilityTypeState(name: "전기", pokemons: ["피카츄", "라이츄", "에렉몬"]),
-    AbilityTypeState(name: "물", pokemons: ["꼬부기", "어니부기", "거북왕"]),
-    AbilityTypeState(name: "풀", pokemons: ["이상해씨", "이상해꽃", "이상해풀"]),
-    AbilityTypeState(name: "불", pokemons: ["파이리", "리자드", "리자몽"]),
-    AbilityTypeState(name: "전기", pokemons: ["피카츄", "라이츄", "에렉몬"]),
-    AbilityTypeState(name: "물", pokemons: ["꼬부기", "어니부기", "거북왕"]),
-    AbilityTypeState(name: "풀", pokemons: ["이상해씨", "이상해꽃", "이상해풀"]),
-    AbilityTypeState(name: "불", pokemons: ["파이리", "리자드", "리자몽"]),
-]
+import ComposableArchitecture
+import Combine
 
 final class ViewController: UIViewController {
+    private let viewStore: ViewStore<AppState, AppAction>
+    private var cancellables: Set<AnyCancellable> = []
     
     private let wholeScrollView = UIScrollView()
     
@@ -106,10 +85,42 @@ final class ViewController: UIViewController {
         view.isScrollEnabled = false
         return view
     }()
+    
+    init(store: Store<AppState, AppAction>) {
+        self.viewStore = ViewStore(store)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configure()
+        
+        (1...10).map { $0 }.forEach { id in
+            viewStore.send(.loadAll(id: id))
+        }
+        
+        viewStore.publisher.pokemonInfos
+            .sink { [weak self] _ in
+                self?.pokemonInfoCollectionView.reloadData()
+            }
+            .store(in: &cancellables)
+        
+        viewStore.publisher.items
+            .sink { [weak self] _ in
+                self?.itemCollectionView.reloadData()
+            }
+            .store(in: &cancellables)
+        
+        viewStore.publisher.types
+            .sink { [weak self] _ in
+                self?.typeCollectionView.reloadData()
+            }
+            .store(in: &cancellables)
     }
     
     private func configure() {
@@ -175,11 +186,11 @@ final class ViewController: UIViewController {
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == pokemonInfoCollectionView {
-            return info.count
+            return viewStore.pokemonInfos.count
         } else if collectionView == itemCollectionView {
-            return items.count
+            return viewStore.items.count
         } else {
-            return types.count
+            return viewStore.types.count
         }
     }
     
@@ -189,21 +200,21 @@ extension ViewController: UICollectionViewDataSource {
                 withReuseIdentifier: PokemonInfoCollectionViewCell.identifier,
                 for: indexPath
             ) as! PokemonInfoCollectionViewCell
-            cell.configure(with: info[indexPath.item])
+            cell.configure(with: viewStore.pokemonInfos[indexPath.item])
             return cell
         } else if collectionView == itemCollectionView {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: ItemCollectionViewCell.identifier,
                 for: indexPath
             ) as! ItemCollectionViewCell
-            cell.configure(item: items[indexPath.item])
+            cell.configure(item: viewStore.items[indexPath.item].sprites.default)
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: TypesCollectionViewCell.identifier,
                 for: indexPath
             ) as! TypesCollectionViewCell
-            cell.configure(with: types[indexPath.item])
+            cell.configure(with: viewStore.types[indexPath.item])
             return cell
         }
     }

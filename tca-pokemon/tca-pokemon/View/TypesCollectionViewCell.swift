@@ -70,7 +70,7 @@ final class TypesCollectionViewCell: UICollectionViewCell {
         pokemonsStackView.addArrangedSubview(label)
     }
     
-    func configure(with type: AbilityTypeState) {
+    func configure(with type: AbilityType) {
         nameLabel.text = type.name
         type.pokemons.forEach { configurePokemonLabels($0) }
     }

@@ -113,7 +113,7 @@ final class PokemonInfoCollectionViewCell: UICollectionViewCell {
         likeButton.isSelected.toggle()
     }
     
-    func configure(with info: PokemonInfoState) {
+    func configure(with info: PokemonInfo) {
         backgroundColoredView.backgroundColor = UIColor(
             red: .random(in: 0...1),
             green: .random(in: 0...1),

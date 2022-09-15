@@ -7,6 +7,8 @@
 
 import UIKit
 
+import ComposableArchitecture
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
@@ -15,7 +17,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
-        let viewController = ViewController()
+        let viewController = ViewController(store: Store(
+            initialState: AppState(pokemonInfos: [], items: [], types: []),
+            reducer: appReducer,
+            environment: AppEnvironment(client: NetworkClient.live))
+        )
         let navigation = UINavigationController(rootViewController: viewController)
         
         window.rootViewController = navigation
