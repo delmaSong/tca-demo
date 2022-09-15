@@ -53,6 +53,8 @@ final class PokemonInfoCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    private var likeButtonTap: () -> Void = {}
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -111,9 +113,10 @@ final class PokemonInfoCollectionViewCell: UICollectionViewCell {
     
     @objc private func likeButtonTapped() {
         likeButton.isSelected.toggle()
+        likeButtonTap()
     }
     
-    func configure(with info: PokemonInfo) {
+    func configure(with info: PokemonInfo, handler: @escaping () -> Void) {
         backgroundColoredView.backgroundColor = UIColor(
             red: .random(in: 0...1),
             green: .random(in: 0...1),
@@ -130,5 +133,7 @@ final class PokemonInfoCollectionViewCell: UICollectionViewCell {
             let data = try Data(contentsOf: url)
             pokemonImageView.image = UIImage(data: data)
         } catch { }
+        
+        likeButtonTap = handler
     }
 }

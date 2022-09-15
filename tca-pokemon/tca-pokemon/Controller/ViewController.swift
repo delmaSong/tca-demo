@@ -200,7 +200,12 @@ extension ViewController: UICollectionViewDataSource {
                 withReuseIdentifier: PokemonInfoCollectionViewCell.identifier,
                 for: indexPath
             ) as! PokemonInfoCollectionViewCell
-            cell.configure(with: viewStore.pokemonInfos[indexPath.item])
+            cell.configure(
+                with: viewStore.pokemonInfos[indexPath.item],
+                handler: { [weak self] in
+                    self?.viewStore.send(.like(at: .pokemonInfo, id: indexPath.item))
+                }
+            )
             return cell
         } else if collectionView == itemCollectionView {
             let cell = collectionView.dequeueReusableCell(

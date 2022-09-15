@@ -23,7 +23,7 @@ enum AppAction {
     case loadPokemonInfo(Result<PokemonInfo, NSError>)
     case loadItem(Result<Item, NSError>)
     case loadType(Result<AbilityType, NSError>)
-    case like(at: HomeSection)
+    case like(at: HomeSection, id: Int)
 }
 
 struct AppEnvironment {
@@ -67,10 +67,14 @@ let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, action, e
         state.pokemonInfos.append(info)
         return .none
         
-    case .like(let section):
+    case .like(let section, let id):
         switch section {
         case .pokemonInfo:
-            print()
+            var info = state.pokemonInfos[id]
+            info.isLiked.toggle()
+            
+            state.pokemonInfos.remove(at: id)
+            state.pokemonInfos.insert(info, at: id)
         default: break
         }
         return .none
